@@ -22,6 +22,7 @@ function Upload(props){
 
         if(e.target.files != null)
         changeSelectedFile(e.target.files[0])
+        console.log(selectedFile)
     }
 
     const { classes, children, className, ...other } = props;
