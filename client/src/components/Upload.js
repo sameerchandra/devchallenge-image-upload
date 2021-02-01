@@ -28,7 +28,7 @@ function Upload(props){
         var data = new FormData() 
         data.append('file', e.target.files[0])
 
-       axios.post("http://localhost:5000/api/upload", data, { 
+       axios.post(`${document.baseURI}/api/upload`, data, { 
       })
       .then(result => {
             if(result.statusText === "OK"){
