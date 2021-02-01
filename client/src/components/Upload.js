@@ -35,10 +35,13 @@ function Upload(props){
                 setTimeout(() => {
                 toggleLoading(false)
                 props.liftStateUp(true)
-                    
+                setUploadedFile(result.data.filename)
                 }, 3000);
+                props.getFileName(uploadedFile)
             }
       })
+
+      
     
 
     }
@@ -46,6 +49,7 @@ function Upload(props){
     const { classes, children, className, ...other } = props;
 
     const [loading,toggleLoading] = useState(false)
+    const [uploadedFile,setUploadedFile] = useState('')
 
 
 
