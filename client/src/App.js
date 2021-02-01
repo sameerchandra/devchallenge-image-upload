@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Upload from './components/Upload'
+import Uploaded from './components/Uploaded'
 
 function App() {
 
@@ -18,9 +19,7 @@ function App() {
   return (
     <div className="outerDiv">
 
-      {loaded ? <div>
-        <img src={fileName}></img>
-      </div> : <Upload liftStateUp={liftStateUp} getFileName = {getFileName}/>}
+      {loaded ? <Uploaded fileName={fileName}/> : <Upload liftStateUp={liftStateUp} getFileName = {getFileName}/>}
     </div>
   );
 }

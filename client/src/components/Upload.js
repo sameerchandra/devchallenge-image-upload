@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useState,useRef,useLayoutEffect} from 'react'
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles';
@@ -34,17 +34,25 @@ function Upload(props){
             if(result.statusText === "OK"){
                 setTimeout(() => {
                 toggleLoading(false)
-                props.liftStateUp(true)
                 setUploadedFile(result.data.filename)
                 }, 3000);
-                props.getFileName(uploadedFile)
             }
       })
-
-      
-    
-
     }
+
+    const firstUpdate = useRef(true);
+
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    if(uploadedFile!=''){
+        props.getFileName(uploadedFile)
+        props.liftStateUp(true)
+    }
+  });
 
     const { classes, children, className, ...other } = props;
 
@@ -58,7 +66,7 @@ function Upload(props){
         <div className={`mainDiv${loading ? "small":""}`}>
             {loading ? 
     <>
-    <div style={{fontSize:20,color:'4f4f4f',width:'90%',marginBottom:15}}>Uploading...</div>
+    <div style={{fontSize:24,color:'4f4f4f',width:'90%',marginBottom:15,fontFamily:"'Poppins',sans-serif"}}>Uploading...</div>
         <LinearIndeterminate />
         </>
     :
