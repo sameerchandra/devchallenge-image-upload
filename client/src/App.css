@@ -52,3 +52,16 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+.mainDivsmall{
+  height: 30%;
+  width: 30%;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding:15px
+}

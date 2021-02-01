@@ -2,6 +2,9 @@ import {React,useState} from 'react'
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios'
+import LinearIndeterminate from './LinearProgress'
+
 
 
 const styles = {
@@ -18,19 +21,44 @@ const styles = {
 
 function Upload(props){
 
-    const handleClickChange = (e) =>{
+    const handleClickChange = async(e) =>{
 
-        if(e.target.files != null)
-        changeSelectedFile(e.target.files[0])
-        console.log(selectedFile)
+        toggleLoading(true)
+
+        var data = new FormData() 
+        data.append('file', e.target.files[0])
+
+       axios.post("http://localhost:5000/api/upload", data, { 
+      })
+      .then(result => {
+            if(result.statusText === "OK"){
+                setTimeout(() => {
+                toggleLoading(false)
+                props.liftStateUp(true)
+                    
+                }, 3000);
+            }
+      })
+    
+
     }
 
     const { classes, children, className, ...other } = props;
 
-    const [selectedFile,changeSelectedFile] = useState('')
+    const [loading,toggleLoading] = useState(false)
+
+
 
     return (
-        <div className="mainDiv">
+        
+        <div className={`mainDiv${loading ? "small":""}`}>
+            {loading ? 
+    <>
+    <div style={{fontSize:20,color:'4f4f4f',width:'90%',marginBottom:15}}>Uploading...</div>
+        <LinearIndeterminate />
+        </>
+    :
+    <>
             <div className="innerDiv">
                 <span style={{fontWeight:"400",fontSize:30,color:"#4f4f4f"}}>Upload your image</span>
                 <p style={{marginTop:20,color:'#828282'}}>File should be Jpeg, Png...</p>
@@ -43,7 +71,7 @@ function Upload(props){
             <Button className={clsx(classes.root, className)} {...other} variant="contained" color="primary" component="label">
         Choose a file
         <input onChange={handleClickChange} type="file" hidden></input>
-      </Button>
+      </Button></>}
         </div>
     )
 }
