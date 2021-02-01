@@ -18,6 +18,12 @@ const styles = {
 
 function Upload(props){
 
+    const handleClickChange = (e) =>{
+
+        if(e.target.files != null)
+        changeSelectedFile(e.target.files[0])
+    }
+
     const { classes, children, className, ...other } = props;
 
     const [selectedFile,changeSelectedFile] = useState('')
@@ -33,9 +39,9 @@ function Upload(props){
                 </div>
             </div>
             <div style={{color:'#bdbdbd',marginBottom:25,pointerEvents:'none'}}>Or</div>
-            <Button onClick={changeSelectedFile(e.target.files[0])} className={clsx(classes.root, className)} {...other} variant="contained" color="primary" component="label">
+            <Button className={clsx(classes.root, className)} {...other} variant="contained" color="primary" component="label">
         Choose a file
-        <input type="file" hidden></input>
+        <input onChange={handleClickChange} type="file" hidden></input>
       </Button>
         </div>
     )
