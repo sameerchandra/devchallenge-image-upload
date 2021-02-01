@@ -20,6 +20,8 @@ function Upload(props){
 
     const { classes, children, className, ...other } = props;
 
+    const [selectedFile,changeSelectedFile] = useState('')
+
     return (
         <div className="mainDiv">
             <div className="innerDiv">
@@ -31,7 +33,7 @@ function Upload(props){
                 </div>
             </div>
             <div style={{color:'#bdbdbd',marginBottom:25,pointerEvents:'none'}}>Or</div>
-            <Button className={clsx(classes.root, className)} {...other} variant="contained" color="primary" component="label">
+            <Button onClick={changeSelectedFile(e.target.files[0])} className={clsx(classes.root, className)} {...other} variant="contained" color="primary" component="label">
         Choose a file
         <input type="file" hidden></input>
       </Button>
