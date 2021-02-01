@@ -32,8 +32,8 @@ jobs:
     - name: Build React App 
       working-directory: ./client
       run: npm run build
-    - run: git fetch --all --unshallow
     - name: Add Heroku Remote
       run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    - run: git fetch --all --unshallow
     - name: Deploy to heroku
       run: git push heroku HEAD:master -f  
