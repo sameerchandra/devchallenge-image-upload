@@ -32,6 +32,7 @@ jobs:
     - name: Build React App 
       working-directory: ./client
       run: npm run build
+    - run:  sed '/build/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
     - name: Add Heroku Remote
       run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
     - run: git fetch --all --unshallow
