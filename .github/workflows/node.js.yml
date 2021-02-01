@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - name: Setup and run tests
+    - name: Install frontend packages
       working-directory: ./client
-      run: npm run build 
+      run: npm i
+    - name: Build React App 
+      working-directory: ./client
+      run: npm run build
